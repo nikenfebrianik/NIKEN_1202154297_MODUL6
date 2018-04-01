@@ -20,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText logEmail, logPass;
     Button btnLog, btnReg;
 
+    //deklarasi pake firebaseauth
     FirebaseAuth auth;
 
     @Override
@@ -42,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         logPass = findViewById(R.id.etPass);
         btnReg = findViewById(R.id.btnRegister);
         btnLog = findViewById(R.id.btnLogin);
+        //bikin listener kalo di klik bakal nampilin apa
+        //listener buat tombol register
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +53,8 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        //listener buat tombol login
         btnLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,17 +63,23 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    //method login
     private void logFirebase() {
+        //nangkep isi yg dimasukin user
         String email = logEmail.getText().toString();
         String pass = logPass.getText().toString();
 
+        //nampilin toast buat inputan email kalo kosong
         if (TextUtils.isEmpty(email)){
             Toast.makeText(this, "periksa kembali email Anda", Toast.LENGTH_SHORT).show();
         }
+
+        //nampilin toast buat inputan pass kalo kosong
         if (TextUtils.isEmpty(pass)){
             Toast.makeText(this, "periksa kembali password Anda", Toast.LENGTH_SHORT).show();
         }
 
+        //method bawaan dari firebase buat login
         auth.signInWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override

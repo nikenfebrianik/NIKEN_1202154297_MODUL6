@@ -20,6 +20,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText regEmail, regPass;
     Button btnReg;
 
+    //deklarasi pake firebaseauth
     FirebaseAuth auth;
 
     @Override
@@ -35,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
         regPass = findViewById(R.id.etPass);
         btnReg = findViewById(R.id.btnRegister);
 
+        //listener buat tombol register
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,13 +46,17 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    //method register
     private void regFirebase() {
+        //nangkep isi yang ditulis pas regist dari user
         String email = regEmail.getText().toString();
         String pass = regPass.getText().toString();
 
+        //nampilin toast buat inputan email kalo kosong
         if (TextUtils.isEmpty(email)){
             Toast.makeText(this, "periksa kembali email Anda", Toast.LENGTH_SHORT).show();
         }
+        //nampilin toast buat inputan pass kalo kosong
         if (TextUtils.isEmpty(pass)){
             Toast.makeText(this, "periksa kembali password Anda", Toast.LENGTH_SHORT).show();
         }

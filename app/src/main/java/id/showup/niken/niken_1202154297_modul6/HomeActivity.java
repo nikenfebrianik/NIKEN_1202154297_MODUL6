@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
+    //deklarasi variable
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
@@ -25,9 +26,13 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        //referencing
+        //wadah dari fragment - content fragment
         viewPager = findViewById(R.id.vpFrag);
         setupViewPager(viewPager);
 
+        //tab menu bawah actionbar
         tabLayout = (TabLayout) findViewById(R.id.tabMenu);
         tabLayout.setupWithViewPager(viewPager);
     }
@@ -42,9 +47,8 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        switch (id) {
+        //kondisi untuk logout
+        switch (item.getItemId()) {
             case R.id.logout:
                 logoutFirebase();
                 return true;
@@ -62,13 +66,15 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
+        //memanggil dan nambah adapter per fragment
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OneFragment(), "ONE");
-        adapter.addFragment(new TwoFragment(), "TWO");
+        adapter.addFragment(new OneFragment(), "TERBARU");
+        adapter.addFragment(new TwoFragment(), "FOTO SAYA");
         viewPager.setAdapter(adapter);
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
+        //yang ngatur dan nyusun fragment
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
@@ -76,16 +82,19 @@ public class HomeActivity extends AppCompatActivity {
             super(manager);
         }
 
+        //nunjukin posisi fragment mana yg dipilih
         @Override
         public Fragment getItem(int position) {
             return mFragmentList.get(position);
         }
 
+        //ngitung jumlah fragment yg dibuat
         @Override
         public int getCount() {
             return mFragmentList.size();
         }
 
+        //bikin isi fragment mau muat apa aja
         public void addFragment(Fragment fragment, String title) {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
